@@ -6,7 +6,7 @@ pipeline {
 
         AWS_REGION = 'ap-south-1'
 
-        ECR_REPO = '607709788195.dkr.ecr.ap-south-1.amazonaws.com/sunglasses-store'
+        ECR_REPO = '763493443839.dkr.ecr.ap-south-1.amazonaws.com/sunglasses-store'
 
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
@@ -18,7 +18,7 @@ pipeline {
 
     stages {
 
-        stage('Checkout-Code') {
+        stage('CheckOutCode') {
 
             steps {
 
@@ -34,20 +34,7 @@ pipeline {
             }
         }
 
-        stage('Code-Analysis') {
-
-            steps {
-
-                sh '''
-                mvn sonar:sonar \
-                -Dsonar.projectKey=sunglasses-store \
-                -Dsonar.host.url=http://SONARQUBE-SERVER:9000 \
-                -Dsonar.login=YOUR_SONAR_TOKEN
-                '''
-            }
-        }
-
-        stage('Build-Docker-Image') {
+        stage('Build-Image') {
 
             steps {
 
@@ -61,12 +48,12 @@ pipeline {
 
                 sh '''
                 aws ecr get-login-password --region $AWS_REGION \
-                | docker login --username AWS --password-stdin 607709788195.dkr.ecr.ap-south-1.amazonaws.com
+                | docker login --username AWS --password-stdin 763493443839.dkr.ecr.ap-south-1.amazonaws.com
                 '''
             }
         }
 
-        stage('Push-Docker-Image') {
+        stage('Docker-Push') {
 
             steps {
 
@@ -82,7 +69,7 @@ pipeline {
 
                 aws eks update-kubeconfig \
                 --region $AWS_REGION \
-                --name prod-eks
+                --name my-cluster
 
                 sed -i "s|IMAGE_PLACEHOLDER|$ECR_REPO:$IMAGE_TAG|g" k8s/sunglasses-store-deployment.yaml
 
