@@ -5,25 +5,53 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Spring Boot Parent -->
+
+    <parent>
+
+        <groupId>org.springframework.boot</groupId>
+
+        <artifactId>spring-boot-starter-parent</artifactId>
+
+        <version>2.7.18</version>
+
+        <relativePath/>
+
+    </parent>
+
+    <!-- Project Info -->
+
     <groupId>com.mt</groupId>
+
     <artifactId>sunglasses-store</artifactId>
+
     <version>1.0</version>
 
     <packaging>war</packaging>
 
     <name>sunglasses-store</name>
 
-    <description>Sunglasses Store Java WAR Application</description>
+    <description>Sunglasses Store WAR Application</description>
+
+    <!-- Properties -->
 
     <properties>
 
-        <jdk.version>11</jdk.version>
+        <java.version>11</java.version>
 
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>
+            UTF-8
+        </project.build.sourceEncoding>
 
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.reporting.outputEncoding>
+            UTF-8
+        </project.reporting.outputEncoding>
 
-        <sonar.host.url>http://3.108.221.28:9000/</sonar.host.url>
+        <!-- SonarQube -->
+
+        <sonar.host.url>
+            http://3.108.221.28:9000/
+        </sonar.host.url>
 
         <sonar.login>
             squ_1c1c901a6c065cae1a76d4148e9508b0a8f4a172
@@ -31,43 +59,47 @@
 
     </properties>
 
+    <!-- Dependencies -->
+
     <dependencies>
 
-        <!-- Spring MVC -->
+        <!-- Spring Boot Web -->
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>5.3.30</version>
+
+            <groupId>org.springframework.boot</groupId>
+
+            <artifactId>spring-boot-starter-web</artifactId>
+
         </dependency>
 
-        <!-- Servlet API -->
+        <!-- External Tomcat -->
 
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
+
+            <groupId>org.springframework.boot</groupId>
+
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+
             <scope>provided</scope>
+
         </dependency>
 
-        <!-- JSON -->
+        <!-- Testing -->
 
         <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20231013</version>
-        </dependency>
 
-        <!-- JUnit -->
+            <groupId>org.springframework.boot</groupId>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
+            <artifactId>spring-boot-starter-test</artifactId>
+
             <scope>test</scope>
+
         </dependency>
 
     </dependencies>
+
+    <!-- Distribution Management -->
 
     <distributionManagement>
 
@@ -85,25 +117,47 @@
 
     </distributionManagement>
 
+    <!-- Build -->
+
     <build>
+
+        <!-- Custom Source Path -->
 
         <sourceDirectory>
             backend/src/main/java
         </sourceDirectory>
 
+        <!-- Resource Path -->
+
         <resources>
 
             <resource>
+
                 <directory>
                     backend/src/main/resources
                 </directory>
+
             </resource>
 
         </resources>
 
+        <!-- Final WAR Name -->
+
         <finalName>sunglasses-store</finalName>
 
+        <!-- Plugins -->
+
         <plugins>
+
+            <!-- Spring Boot Plugin -->
+
+            <plugin>
+
+                <groupId>org.springframework.boot</groupId>
+
+                <artifactId>spring-boot-maven-plugin</artifactId>
+
+            </plugin>
 
             <!-- Compiler Plugin -->
 
@@ -117,9 +171,9 @@
 
                 <configuration>
 
-                    <source>${jdk.version}</source>
+                    <source>${java.version}</source>
 
-                    <target>${jdk.version}</target>
+                    <target>${java.version}</target>
 
                 </configuration>
 
