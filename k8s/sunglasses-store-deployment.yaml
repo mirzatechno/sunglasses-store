@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: production
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sunglasses-store-deployment
+  namespace: production
+
+spec:
+  replicas: 2
+
+  revisionHistoryLimit: 5
+
+  selector:
+    matchLabels:
+      app: sunglasses-store
+
+  strategy:
+    type: RollingUpdate
+
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+
+  minReadySeconds: 30
+
+  template:
+    metadata:
+      labels:
+        app: sunglasses-store
+
+    spec:
+      containers:
+      - name: sunglasses-store-container
+
+        image: IMAGE_PLACEHOLDER
+
+        imagePullPolicy: Always
+
+        ports:
+        - containerPort: 8080
+
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sunglasses-store-service
+  namespace: production
+
+spec:
+  type: LoadBalancer
+
+  selector:
+    app: sunglasses-store
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
