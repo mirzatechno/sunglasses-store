@@ -50,11 +50,11 @@
         <!-- SonarQube -->
 
         <sonar.host.url>
-            http://3.108.221.28:9000/
+            http://13.126.175.198:9000/
         </sonar.host.url>
 
         <sonar.login>
-            squ_1c1c901a6c065cae1a76d4148e9508b0a8f4a172
+            squ_52a4f97341b72315d322a996a553571f6b5ce164
         </sonar.login>
 
     </properties>
