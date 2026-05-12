@@ -30,6 +30,7 @@ spec:
 
   template:
     metadata:
+      name: sunglasses-store-pod
       labels:
         app: sunglasses-store
 
