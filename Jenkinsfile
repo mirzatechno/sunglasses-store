@@ -22,7 +22,7 @@ pipeline {
 
             steps {
 
-                git 'https://github.com/mirzatechno/sunglasses-store.git'
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git token', url: 'https://github.com/mirzatechno/sunglasses-store.git']])
             }
         }
 
