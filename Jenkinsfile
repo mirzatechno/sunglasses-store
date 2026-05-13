@@ -34,6 +34,14 @@ pipeline {
             }
         }
 
+        stage('sonar-quality') {
+
+            steps {
+
+                sh 'mvn sonar:sonar'
+            }
+        }
+
         stage('Build-Image') {
 
             steps {
